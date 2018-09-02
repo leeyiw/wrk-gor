@@ -1,3 +1,10 @@
+local counter = 1
+
+function setup(thread)
+    thread:set("id", counter)
+    counter = counter + 1
+end
+
 function init(args)
     local filename
     for i=1,#args,2 do
@@ -11,7 +18,7 @@ function init(args)
         error("open gor file error: " .. errmsg)
     end
 
-    print("loading data from file `" .. filename .. "`")
+    print("loading data from file `" .. filename .. "` for thread #" .. id)
     i = 1
     requests = {}
     while true do
@@ -25,8 +32,6 @@ function init(args)
 end
 
 function request()
-    local i = wrk.thread:get("i")
-    local requests = wrk.thread:get("requests")
     if i > #requests then
         i = 1
     end
