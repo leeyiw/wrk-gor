@@ -23,11 +23,11 @@ function init(args)
     requests = {}
     while true do
         meta = getline(f)
-        request = getrequest(f)
-        if meta == nil or request == nil then
+        r = getrequest(f)
+        if meta == nil or r == nil then
             break
         end
-        table.insert(requests, request)
+        table.insert(requests, r)
     end
 end
 
