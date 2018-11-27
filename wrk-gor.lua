@@ -57,7 +57,7 @@ function getline(f)
             buf = nil
         else
             l = l .. buf:sub(0, n)
-            buf = buf:sub(n)
+            buf = buf:sub(n + 1)
             break
         end
     end
@@ -75,11 +75,14 @@ function getrequest(f)
         end
         local s, e = buf:find("\n\xf0\x9f\x90\xb5\xf0\x9f\x99\x88\xf0\x9f\x99\x89\n")
         if s == nil then
+            s, e = buf:find("\n🐵🙈🙉\n")
+        end
+        if s == nil then
             r = r .. buf
             buf = nil
         else
             r = r .. buf:sub(0, s)
-            buf = buf:sub(e)
+            buf = buf:sub(e + 1)
             break
         end
     end
